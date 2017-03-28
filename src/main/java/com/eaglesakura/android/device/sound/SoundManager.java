@@ -1,7 +1,5 @@
 package com.eaglesakura.android.device.sound;
 
-import com.eaglesakura.util.LogUtil;
-
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
@@ -17,7 +15,7 @@ import java.util.Map.Entry;
  * SE管理クラス
  */
 public class SoundManager {
-    Map<Object, MediaPlayer> medias = new HashMap<Object, MediaPlayer>();
+    Map<Object, MediaPlayer> medias = new HashMap<>();
     Context context = null;
 
     /**
@@ -55,7 +53,7 @@ public class SoundManager {
             medias.put(id, player);
             return true;
         } catch (Exception e) {
-            LogUtil.log(e);
+            e.printStackTrace();
             return false;
         }
     }
@@ -67,7 +65,7 @@ public class SoundManager {
             medias.put(id, player);
             return true;
         } catch (Exception e) {
-            LogUtil.log(e);
+            e.printStackTrace();
             return false;
         }
     }
@@ -83,7 +81,7 @@ public class SoundManager {
             medias.put(id, player);
             return true;
         } catch (Exception e) {
-            LogUtil.log(e);
+            e.printStackTrace();
             return false;
         }
     }
@@ -104,7 +102,7 @@ public class SoundManager {
                 }
             }
         } catch (Exception e) {
-            LogUtil.log(e);
+            e.printStackTrace();
         }
     }
 
@@ -133,7 +131,7 @@ public class SoundManager {
             }
             player.release();
         } catch (Exception e) {
-            LogUtil.log(e);
+            e.printStackTrace();
         }
     }
 
@@ -147,7 +145,7 @@ public class SoundManager {
             try {
                 release(entry.getValue());
             } catch (Exception e) {
-                LogUtil.log(e);
+                e.printStackTrace();
             }
             iterator.remove();
         }

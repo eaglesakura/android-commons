@@ -1,7 +1,6 @@
 package com.eaglesakura.android.util;
 
 import com.eaglesakura.util.IOUtil;
-import com.eaglesakura.util.LogUtil;
 import com.eaglesakura.util.MathUtil;
 
 import android.content.Context;
@@ -148,7 +147,7 @@ public class ImageUtil {
         try {
             return BitmapFactory.decodeFile(pathName);
         } catch (Exception e) {
-            LogUtil.log(e);
+            e.printStackTrace();
         }
         return null;
     }

@@ -1,7 +1,5 @@
 package com.eaglesakura.android.device.sound;
 
-import com.eaglesakura.util.LogUtil;
-
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -69,7 +67,7 @@ public class SoundPoolManager {
         try {
             soundPool.play((int) soundId, 1.0f, 1.0f, 0, loop ? -1 : 0, 1.0f);
         } catch (Exception e) {
-            LogUtil.log(e);
+            e.printStackTrace();
         }
     }
 

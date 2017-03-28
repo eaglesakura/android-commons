@@ -1,7 +1,5 @@
 package com.eaglesakura.android.graphics;
 
-import com.eaglesakura.util.LogUtil;
-
 import android.graphics.Bitmap;
 
 import java.nio.Buffer;
@@ -71,7 +69,7 @@ public class DecodedImage {
             result.pixels = pixelBuffer;
         }
 
-        LogUtil.log("image size(%d x %d)", image_width, image_height);
+//        Logger.out(Logger.LEVEL_DEBUG, "image size(%d x %d)", image_width, image_height);
 
         final int ONCE_READ_LINE = 128;
         final int[] temp = new int[image_width * ONCE_READ_LINE];

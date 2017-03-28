@@ -4,7 +4,6 @@ import com.eaglesakura.android.util.AndroidThreadUtil;
 import com.eaglesakura.lambda.CallbackUtils;
 import com.eaglesakura.lambda.CancelCallback;
 import com.eaglesakura.thread.Holder;
-import com.eaglesakura.util.LogUtil;
 import com.eaglesakura.util.ThrowableRunnable;
 import com.eaglesakura.util.ThrowableRunner;
 
@@ -98,7 +97,6 @@ public class UIHandler extends Handler {
                 try {
                     sync.wait(timeoutMs);
                 } catch (InterruptedException e) {
-                    LogUtil.log(e);
                 }
             }
         }

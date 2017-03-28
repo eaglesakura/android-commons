@@ -4,7 +4,7 @@ package com.eaglesakura.android.device.sound;
 import com.eaglesakura.android.device.sound.mic.AudioContext;
 import com.eaglesakura.android.device.sound.mic.MicBuffer;
 import com.eaglesakura.lambda.CancelCallback;
-import com.eaglesakura.util.LogUtil;
+import com.eaglesakura.log.Logger;
 import com.eaglesakura.util.Timer;
 
 import org.junit.Test;
@@ -45,7 +45,7 @@ public class MicAudioBufferTest {
             @Override
             public void onRecord(MicAudioBuffer buffer, AudioRecord audio, AudioContext audioContext) {
                 MicBuffer currentBuffer = audioContext.getCurrentBuffer();
-                LogUtil.out("Mic", "onRecord context size[%d] RMS[%.3f] AVG[%.3f] spike[%s]", audioContext.getMicBufferList().size(), currentBuffer.getRMS(), audioContext.getAverageRMS(), "" + audioContext.isSpikeRMS(0.05));
+                Logger.out(Logger.LEVEL_DEBUG, "Mic", "onRecord context size[%d] RMS[%.3f] AVG[%.3f] spike[%s]", audioContext.getMicBufferList().size(), currentBuffer.getRMS(), audioContext.getAverageRMS(), "" + audioContext.isSpikeRMS(0.05));
             }
         }, new CancelCallback() {
             @Override

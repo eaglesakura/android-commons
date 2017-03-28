@@ -1,6 +1,6 @@
 package com.eaglesakura.android.device.external;
 
-import com.eaglesakura.util.LogUtil;
+import com.eaglesakura.log.Logger;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +19,7 @@ public class StorageTest {
         Storage storage = Storage.getExternalStorage(InstrumentationRegistry.getTargetContext());
         assertNotNull(storage);
 
-        LogUtil.out(getClass().getName(), "Storage path[%s] size[%.1f GB Free / %.1f GB Max]", storage.getPath().getAbsolutePath(), storage.getFreeSizeGB(), storage.getMaxSizeGB());
+        Logger.out(Logger.LEVEL_DEBUG, getClass().getName(), "Storage path[%s] size[%.1f GB Free / %.1f GB Max]", storage.getPath().getAbsolutePath(), storage.getFreeSizeGB(), storage.getMaxSizeGB());
         assertNotNull(storage.getPath());
         assertTrue(storage.getMaxSize() > 0);
         assertTrue(storage.getFreeSize() >= 0);
@@ -32,8 +32,8 @@ public class StorageTest {
         Storage dataPath = Storage.getExternalDataStorage(InstrumentationRegistry.getTargetContext());
 
 
-        LogUtil.out(getClass().getName(), "Root [%s] size[%.1f GB Free / %.1f GB Max]", rootPath.getPath().getAbsolutePath(), rootPath.getFreeSizeGB(), rootPath.getMaxSizeGB());
-        LogUtil.out(getClass().getName(), "Data [%s] size[%.1f GB Free / %.1f GB Max]", dataPath.getPath().getAbsolutePath(), dataPath.getFreeSizeGB(), dataPath.getMaxSizeGB());
+        Logger.out(Logger.LEVEL_DEBUG, getClass().getName(), "Root [%s] size[%.1f GB Free / %.1f GB Max]", rootPath.getPath().getAbsolutePath(), rootPath.getFreeSizeGB(), rootPath.getMaxSizeGB());
+        Logger.out(Logger.LEVEL_DEBUG, getClass().getName(), "Data [%s] size[%.1f GB Free / %.1f GB Max]", dataPath.getPath().getAbsolutePath(), dataPath.getFreeSizeGB(), dataPath.getMaxSizeGB());
 
         // rootPathの配下に無ければならない
         assertTrue(dataPath.getPath().getAbsolutePath().startsWith(rootPath.getPath().getAbsolutePath()));

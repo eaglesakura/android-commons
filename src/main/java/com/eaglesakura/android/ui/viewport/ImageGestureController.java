@@ -3,7 +3,6 @@ package com.eaglesakura.android.ui.viewport;
 import com.eaglesakura.android.thread.HandlerLoopController;
 import com.eaglesakura.android.thread.UIHandler;
 import com.eaglesakura.math.Vector2;
-import com.eaglesakura.util.LogUtil;
 import com.eaglesakura.util.MathUtil;
 import com.eaglesakura.util.Timer;
 
@@ -250,7 +249,7 @@ public class ImageGestureController implements View.OnTouchListener {
                 return false;
             }
 
-            LogUtil.log("onFling(%f, %f)", velocityX, velocityY);
+//            LogUtil.log("onFling(%f, %f)", velocityX, velocityY);
 //            imageMoveVector.set(velocityX, velocityY);
             return true;
         }

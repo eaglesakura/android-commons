@@ -1,7 +1,5 @@
 package com.eaglesakura.android.utils;
 
-import com.eaglesakura.util.LogUtil;
-
 import org.junit.Before;
 import org.junit.runner.RunWith;
 
@@ -24,24 +22,10 @@ public abstract class CiJUnitTester {
 
     private void initializeLogger() {
         ShadowLog.stream = System.out;
-        LogUtil.setLogger(
-                new LogUtil.Logger() {
-                    @Override
-                    public void out(int level, String tag, String msg) {
-                        try {
-                            StackTraceElement[] trace = new Exception().getStackTrace();
-                            StackTraceElement elem = trace[Math.min(trace.length - 1, 3)];
-                            System.out.println(String.format("%s[%d] : %s", elem.getFileName(), elem.getLineNumber(), msg));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
     }
 
     @Before
     public void onSetup() {
         mContext = RuntimeEnvironment.application;
-        initializeLogger();
     }
 }
