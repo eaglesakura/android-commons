@@ -1,9 +1,7 @@
 /**
- * 1.0.0   : release
- * 1.0.x   : 自動デプロイに移行
- * 2.1.x   : bintrayに移行, Permissionを要求しないUtilをマージ
+ * 2.1.x   : ライブラリ名を変更
  */
-def ARTIFACT_VERSION = "2.0"
+def ARTIFACT_VERSION = "2.1"
 def REPOSITORY_NAME = "maven"
 def BINTRAY_LICENSES = ["MIT"]
 def BINTRAY_LABELS = ["android"]
