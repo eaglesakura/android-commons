@@ -80,9 +80,9 @@ dependencies {
         androidTestCompile project(':eglibrary:simple-logger')
         testCompile project(':eglibrary:simple-logger')
     } else {
-        compile "com.eaglesakura:java-commons:2.0.2"
-        androidTestCompile "com.eaglesakura:simple-logger:2.0.462"
-        testCompile "com.eaglesakura:simple-logger:2.0.462"
+        compile "com.eaglesakura:java-commons:2.0.3"
+        androidTestCompile "com.eaglesakura:simple-logger:2.0.463"
+        testCompile "com.eaglesakura:simple-logger:2.0.463"
     }
 
     compile "com.android.support:support-v4:25.3.0"
