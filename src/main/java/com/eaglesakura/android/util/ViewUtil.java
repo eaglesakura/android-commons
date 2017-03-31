@@ -134,17 +134,33 @@ public class ViewUtil {
         return webView;
     }
 
-    public static View findViewById(View view, @IdRes int... id) {
+    public static <T extends View> T findViewByChildAt(View root, int... indices) {
+        for (int index : indices) {
+            root = ((ViewGroup) root).getChildAt(index);
+        }
+
+        return (T) root;
+    }
+
+    public static <T extends View> T findViewById(View view, @IdRes int... id) {
         for (int i : id) {
             if (view == null) {
                 return null;
             }
             view = view.findViewById(i);
         }
-        return view;
+        return (T) view;
     }
 
-    public static View findViewById(Activity activity, @IdRes int... id) {
+    public static <T extends View> T findViewById(View view, Class<T> clazz, @IdRes int... id) {
+        return findViewById(view, id);
+    }
+
+    public static <T extends View> T findViewById(Activity activity, Class<T> clazz, @IdRes int... id) {
+        return findViewById(activity, id);
+    }
+
+    public static <T extends View> T findViewById(Activity activity, @IdRes int... id) {
         View view = null;
 
         for (int i : id) {
@@ -158,7 +174,7 @@ public class ViewUtil {
                 return null;
             }
         }
-        return view;
+        return (T) view;
     }
 
     public static <T extends View> T findViewByMatcher(View view, Matcher1<View> matcher) {

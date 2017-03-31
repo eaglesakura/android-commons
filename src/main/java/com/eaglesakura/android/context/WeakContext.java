@@ -73,6 +73,14 @@ public class WeakContext {
         return null;
     }
 
+    public android.support.v4.app.Fragment getSupportFragment() {
+        Object obj = mOwner.get();
+        if (obj instanceof android.support.v4.app.Fragment) {
+            return (android.support.v4.app.Fragment) obj;
+        }
+        return null;
+    }
+
     /**
      * オーナーオブジェクトが有効であればtrue
      */
