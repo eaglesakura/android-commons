@@ -61,8 +61,8 @@ if (!hasProperty("EGLIBRARY_COMPILE_LOCAL")) {
 dependencies {
     if (EGLIBRARY_COMPILE_LOCAL) {
         implementation project(':eglibrary:java-commons')
-        androidImplementation project(':eglibrary:simple-logger')
-        testAndroidImplementation project(':eglibrary:simple-logger')
+        androidTestImplementation project(':eglibrary:simple-logger')
+        testImplementation project(':eglibrary:simple-logger')
     } else {
         compile "com.eaglesakura:java-commons:2.0.3"
         androidTestCompile "com.eaglesakura:simple-logger:2.0.463"
