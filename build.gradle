@@ -1,7 +1,8 @@
 /**
  * 2.1.x   : ライブラリ名を変更
+ * 2.2.x   : AS 3.0対応
  */
-def ARTIFACT_VERSION = "2.1"
+def ARTIFACT_VERSION = "2.2"
 def REPOSITORY_NAME = "maven"
 def BINTRAY_LICENSES = ["MIT"]
 def BINTRAY_LABELS = ["android"]
@@ -11,22 +12,22 @@ def BINTRAY_GPG_PASS = System.env.BINTRAY_GPG_PASS
 buildscript {
     repositories {
         jcenter()
+        maven { url "https://maven.google.com" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
-        classpath 'me.tatarka:gradle-retrolambda:3.5.0' // support Lambda
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha1'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
     }
 }
 
 repositories {
-    mavenCentral()
+    jcenter()
+    maven { url "https://maven.google.com" }
     maven { url "https://dl.bintray.com/eaglesakura/maven/" }
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'me.tatarka.retrolambda' /* Android Lambda Support */
 group = "com.eaglesakura"
 version = ARTIFACT_VERSION + getArtifactVersionSuffix()
 
@@ -36,14 +37,12 @@ android {
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
         vectorDrawables.useSupportLibrary = true        // using vector getDrawable
-
-        // Device Test
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"    // JUnit4
     }
     lintOptions {
@@ -55,31 +54,15 @@ android {
     }
 }
 
-/**
- * UnitTest & retro lambda
- */
-tasks.withType(Test) {
-    project.tasks
-            .findAll {
-        task -> (task.name ==~ /compile.*?TestJava.*?/)
-    }
-    .each { task ->
-        task.doFirst {
-            sourceCompatibility = JavaVersion.VERSION_1_8
-            targetCompatibility = JavaVersion.VERSION_1_8
-        }
-    }
-}
-
 if (!hasProperty("EGLIBRARY_COMPILE_LOCAL")) {
     ext.EGLIBRARY_COMPILE_LOCAL = false
 }
 
 dependencies {
     if (EGLIBRARY_COMPILE_LOCAL) {
-        compile project(':eglibrary:java-commons')
-        androidTestCompile project(':eglibrary:simple-logger')
-        testCompile project(':eglibrary:simple-logger')
+        implementation project(':eglibrary:java-commons')
+        androidImplementation project(':eglibrary:simple-logger')
+        testandroidImplementation project(':eglibrary:simple-logger')
     } else {
         compile "com.eaglesakura:java-commons:2.0.3"
         androidTestCompile "com.eaglesakura:simple-logger:2.0.463"

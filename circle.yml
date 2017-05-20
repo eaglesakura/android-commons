@@ -19,7 +19,7 @@ test:
   override:
     - sh -c "$(curl -fsSL https://raw.githubusercontent.com/eaglesakura/build-dependencies/master/circleci/build-test.sh)"
 deployment:
-  canary:
+  versions:
     branch: /^v[0-9]\..*$/
     commands:
       - echo "skip upload"
