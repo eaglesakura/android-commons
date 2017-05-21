@@ -64,14 +64,14 @@ dependencies {
         androidTestImplementation project(':eglibrary:simple-logger')
         testImplementation project(':eglibrary:simple-logger')
     } else {
-        implementation "com.eaglesakura:java-commons:2.0.3"
-        androidTestImplementation "com.eaglesakura:simple-logger:2.0.463"
-        testImplementation "com.eaglesakura:simple-logger:2.0.463"
+        compile "com.eaglesakura:java-commons:2.0.3"
+        androidTestCompile "com.eaglesakura:simple-logger:2.0.463"
+        testCompile "com.eaglesakura:simple-logger:2.0.463"
     }
 
-    implementation "com.android.support:support-v4:25.3.1"
-    implementation "com.android.support:appcompat-v7:25.3.1"
-    implementation "com.android.support:support-vector-drawable:25.3.1"
+    compile "com.android.support:support-v4:25.3.1"
+    compile "com.android.support:appcompat-v7:25.3.1"
+    compile "com.android.support:support-vector-drawable:25.3.1"
     compile "com.android.support:support-annotations:25.3.1"
 
     testCompile 'junit:junit:4.12'
