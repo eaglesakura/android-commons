@@ -60,7 +60,7 @@ if (!hasProperty("EGLIBRARY_COMPILE_LOCAL")) {
 
 dependencies {
     if (EGLIBRARY_COMPILE_LOCAL) {
-        implementation project(':eglibrary:java-commons')
+        compile project(':eglibrary:java-commons')
         androidTestImplementation project(':eglibrary:simple-logger')
         testImplementation project(':eglibrary:simple-logger')
     } else {
@@ -72,13 +72,13 @@ dependencies {
     implementation "com.android.support:support-v4:25.3.1"
     implementation "com.android.support:appcompat-v7:25.3.1"
     implementation "com.android.support:support-vector-drawable:25.3.1"
-    implementation "com.android.support:support-annotations:25.3.1"
+    compile "com.android.support:support-annotations:25.3.1"
 
-    testImplementation 'junit:junit:4.12'
-    testImplementation "org.robolectric:robolectric:3.1.1"
+    testCompile 'junit:junit:4.12'
+    testCompile "org.robolectric:robolectric:3.1.1"
 
-    androidTestImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:0.5'
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile 'com.android.support.test:runner:0.5'
 }
 
 task sourcesJar(type: Jar) {
@@ -96,9 +96,10 @@ android.libraryVariants.all { variant ->
         description "Generates Android Javadoc for $variant.name."
         source = variant.javaCompile.source
         ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
-        classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar) + files("build/intermediates/classes/${variant.name}/")
-        options.links("http://docs.oracle.com/javase/7/docs/api/");
-        options.links("http://d.android.com/reference/");
+//        classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar) + files("build/intermediates/classes/${variant.name}/")
+        classpath = files(ext.androidJar) + files("build/intermediates/classes/${variant.name}/")
+        options.links("http://docs.oracle.com/javase/7/docs/api/")
+        options.links("http://d.android.com/reference/")
         exclude '**/BuildConfig.java'
         exclude '**/*Dao.java' /* ignore greenDAO */
         exclude '**/DaoMaster.java' /* ignore greenDAO */
