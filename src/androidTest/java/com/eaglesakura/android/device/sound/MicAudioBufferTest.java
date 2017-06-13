@@ -41,17 +41,9 @@ public class MicAudioBufferTest {
         Timer timer = new Timer();
 
         MicAudioBuffer audioBuffer = MicAudioBuffer.Builder.from(InstrumentationRegistry.getContext()).build();
-        audioBuffer.record(new MicAudioBuffer.RecordCallback() {
-            @Override
-            public void onRecord(MicAudioBuffer buffer, AudioRecord audio, AudioContext audioContext) {
-                MicBuffer currentBuffer = audioContext.getCurrentBuffer();
-                Logger.out(Logger.LEVEL_DEBUG, "Mic", "onRecord context size[%d] RMS[%.3f] AVG[%.3f] spike[%s]", audioContext.getMicBufferList().size(), currentBuffer.getRMS(), audioContext.getAverageRMS(), "" + audioContext.isSpikeRMS(0.05));
-            }
-        }, new CancelCallback() {
-            @Override
-            public boolean isCanceled() throws Throwable {
-                return timer.end() > (1000 * 60);
-            }
-        });
+        audioBuffer.record((buffer, audio, audioContext) -> {
+            MicBuffer currentBuffer = audioContext.getCurrentBuffer();
+            Logger.out(Logger.LEVEL_DEBUG, "Mic", "onRecord context size[%d] RMS[%.3f] AVG[%.3f] spike[%s]", audioContext.getMicBufferList().size(), currentBuffer.getRMS(), audioContext.getAverageRMS(), "" + audioContext.isSpikeRMS(0.05));
+        }, () -> timer.end() > (1000 * 10));
     }
 }
