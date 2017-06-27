@@ -73,7 +73,16 @@ public class FragmentUtil {
 
                     // 子Fragmentを足し込む
                     if (frag != null) {
-                        result.addAll(listFragments(frag.getChildFragmentManager(), matcher));
+                        FragmentManager childFragmentManager = null;
+                        try {
+                            childFragmentManager = frag.getChildFragmentManager();
+                        } catch (IllegalStateException e) {
+                            // not attached
+                        }
+
+                        if (childFragmentManager != null) {
+                            result.addAll(listFragments(childFragmentManager, matcher));
+                        }
                     }
                 }
             }
