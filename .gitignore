@@ -6,3 +6,4 @@ cygdrive/
 *.iml
 /ci-release
 /maven
+*.patch
