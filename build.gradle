@@ -63,15 +63,7 @@ if (!hasProperty("EGLIBRARY_COMPILE_LOCAL")) {
 }
 
 dependencies {
-    if (EGLIBRARY_COMPILE_LOCAL) {
-        api project(':eglibrary:java-commons')
-        androidTestImplementation project(':eglibrary:simple-logger')
-        testImplementation project(':eglibrary:simple-logger')
-    } else {
-        compile "com.eaglesakura:java-commons:2.2.0"
-        androidTestImplementation "com.eaglesakura:simple-logger:2.1.0"
-        testImplementation "com.eaglesakura:simple-logger:2.1.0"
-    }
+    compile "com.eaglesakura:java-commons:2.2.0"
 
     implementation "com.android.support:support-v4:25.3.1"
     implementation "com.android.support:appcompat-v7:25.3.1"
@@ -80,7 +72,9 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
     testImplementation "org.robolectric:robolectric:3.1.1"
+    testImplementation "com.eaglesakura:simple-logger:2.1.0"
 
+    androidTestImplementation "com.eaglesakura:simple-logger:2.1.0"
     androidTestImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:0.5'
 }
