@@ -58,10 +58,6 @@ android {
     }
 }
 
-if (!hasProperty("EGLIBRARY_COMPILE_LOCAL")) {
-    ext.EGLIBRARY_COMPILE_LOCAL = false
-}
-
 dependencies {
     compile "com.eaglesakura:java-commons:2.2.0"
 
