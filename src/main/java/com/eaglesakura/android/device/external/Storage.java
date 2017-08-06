@@ -200,7 +200,14 @@ public class Storage {
             }
 
             // それより古いバージョンであれば、Pathを揃える
-            return new Storage(IOUtil.mkdirs(new File(storage.getPath(), "Android/data/" + context.getPackageName() + "/files")), storage.mFlag);
+            File targetDir = IOUtil.mkdirs(new File(storage.getPath(), "Android/data/" + context.getPackageName() + "/files"));
+            if (targetDir.isDirectory()) {
+                // 指定したディレクトリが存在している
+                return new Storage(targetDir, storage.mFlag);
+            } else {
+                // 指定したディレクトリが存在しないので、internal directoryを返すしかない
+                return new Storage(context.getFilesDir(), FLAG_INTERNAL_STORAGE);
+            }
         }
     }
 

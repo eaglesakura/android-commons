@@ -1,16 +1,13 @@
 package com.eaglesakura.android.device.sound;
 
 
-import com.eaglesakura.android.device.sound.mic.AudioContext;
 import com.eaglesakura.android.device.sound.mic.MicBuffer;
-import com.eaglesakura.lambda.CancelCallback;
 import com.eaglesakura.log.Logger;
 import com.eaglesakura.util.Timer;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import android.media.AudioRecord;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 

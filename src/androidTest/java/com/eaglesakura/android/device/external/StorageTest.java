@@ -32,8 +32,8 @@ public class StorageTest {
         Storage dataPath = Storage.getExternalDataStorage(InstrumentationRegistry.getTargetContext());
 
 
-        Logger.out(Logger.LEVEL_DEBUG, getClass().getName(), "Root [%s] size[%.1f GB Free / %.1f GB Max]", rootPath.getPath().getAbsolutePath(), rootPath.getFreeSizeGB(), rootPath.getMaxSizeGB());
-        Logger.out(Logger.LEVEL_DEBUG, getClass().getName(), "Data [%s] size[%.1f GB Free / %.1f GB Max]", dataPath.getPath().getAbsolutePath(), dataPath.getFreeSizeGB(), dataPath.getMaxSizeGB());
+        Logger.out(Logger.LEVEL_DEBUG, getClass().getName(), "Root [%s] size[%.1f GB Free / %.1f GB Max] SDCard[%s]", rootPath.getPath().getAbsolutePath(), rootPath.getFreeSizeGB(), rootPath.getMaxSizeGB(), String.valueOf(rootPath.isSdcard()));
+        Logger.out(Logger.LEVEL_DEBUG, getClass().getName(), "Data [%s] size[%.1f GB Free / %.1f GB Max] SDCard[%s]", dataPath.getPath().getAbsolutePath(), dataPath.getFreeSizeGB(), dataPath.getMaxSizeGB(), String.valueOf(rootPath.isSdcard()));
 
         // rootPathの配下に無ければならない
         assertTrue(dataPath.getPath().getAbsolutePath().startsWith(rootPath.getPath().getAbsolutePath()));
