@@ -1,13 +1,15 @@
 package com.eaglesakura.android.thread;
 
 import android.os.Handler;
+import android.support.annotation.Nullable;
 
+import com.eaglesakura.lambda.Action1;
 import com.eaglesakura.util.Timer;
 
 /**
  * 指定のハンドラでループ処理を行うUtilクラス
  */
-public abstract class HandlerLoopController {
+public class HandlerLoopController {
     final private Handler mHandler;
 
     /**
@@ -26,8 +28,6 @@ public abstract class HandlerLoopController {
      */
     private boolean mDisposed = false;
 
-    final protected Object lock = new Object();
-
     /**
      * ループ時間管理用タイマー
      */
@@ -38,12 +38,39 @@ public abstract class HandlerLoopController {
      */
     private double mDeltaTime = 1.0;
 
-    public HandlerLoopController(Handler handler) {
+    /**
+     * ハンドラ実行
+     */
+    private Action1<Double> mHandlerAction;
+
+    public HandlerLoopController(@Nullable Handler handler) {
+        this(handler, (Action1<Double>) null);
+    }
+
+    public HandlerLoopController(@Nullable Handler handler, @Nullable Runnable runnable) {
+        this(handler, delta -> {
+            if (runnable != null) {
+                runnable.run();
+            }
+        });
+    }
+
+    public HandlerLoopController(@Nullable Handler handler, @Nullable Action1<Double> loopAction) {
         if (handler != null) {
             this.mHandler = handler;
         } else {
             this.mHandler = AsyncHandler.createInstance("HandlerLoopController");
         }
+        mHandlerAction = loopAction;
+    }
+
+    /**
+     * 秒単位のインターバルを設定する
+     *
+     * @param intervalSec 実行間隔（秒）
+     */
+    public void setLoopIntervalSec(double intervalSec) {
+        setFrameRate(1.0 / intervalSec);
     }
 
     /**
@@ -61,6 +88,9 @@ public abstract class HandlerLoopController {
      * 処理を開始する
      */
     public void connect() {
+        if (mDisposed) {
+            throw new IllegalStateException("Handler is disposed");
+        }
         mLooping = true;
         mHandler.removeCallbacks(loopRunner);
         mHandler.post(loopRunner);
@@ -80,6 +110,7 @@ public abstract class HandlerLoopController {
     public void dispose() {
         if (mHandler != UIHandler.getInstance()) {
             mHandler.getLooper().quit();
+            mDisposed = true;
         }
     }
 
@@ -107,7 +138,15 @@ public abstract class HandlerLoopController {
     /**
      * 更新を行う
      */
-    protected abstract void onUpdate();
+    protected void onUpdate() {
+        if (mHandlerAction != null) {
+            try {
+                mHandlerAction.action(getDeltaTime());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
 
     private Runnable loopRunner = new Runnable() {
