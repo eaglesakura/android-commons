@@ -43,6 +43,10 @@ public class HandlerLoopController {
      */
     private Action1<Double> mHandlerAction;
 
+    /**
+     * コンストラクタにメソッド参照を渡すことを推奨する
+     */
+    @Deprecated
     public HandlerLoopController(@Nullable Handler handler) {
         this(handler, (Action1<Double>) null);
     }
