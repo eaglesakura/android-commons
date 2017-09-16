@@ -33,7 +33,7 @@ public class AsyncHandler extends Handler {
         }
     }
 
-    public <ReturnType, ErrorType extends Throwable> ReturnType await(ThrowableRunnable<ReturnType, ErrorType> action) throws ErrorType {
+    public <ReturnType, ErrorType extends Exception> ReturnType await(ThrowableRunnable<ReturnType, ErrorType> action) throws ErrorType {
         ThrowableRunner<ReturnType, ErrorType> runner = new ThrowableRunner<>(action);
         post(runner);
         return runner.await();

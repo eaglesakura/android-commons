@@ -67,7 +67,7 @@ public class UIHandler extends Handler {
         instance.postDelayed(runnable, delay);
     }
 
-    public static <ReturnType, ErrorType extends Throwable> ReturnType await(ThrowableRunnable<ReturnType, ErrorType> action) throws ErrorType {
+    public static <ReturnType, ErrorType extends Exception> ReturnType await(ThrowableRunnable<ReturnType, ErrorType> action) throws ErrorType {
         ThrowableRunner<ReturnType, ErrorType> runner = new ThrowableRunner<>(action);
         postUIorRun(runner);
         return runner.await();
